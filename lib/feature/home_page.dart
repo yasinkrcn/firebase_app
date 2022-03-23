@@ -1,8 +1,14 @@
-import 'package:firebase_app/core/constants/asseth_path.dart';
 import 'package:flutter/material.dart';
 
+import 'package:firebase_app/auth_controller.dart';
+import 'package:firebase_app/core/constants/asseth_path.dart';
+
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  String email;
+  HomePage({
+    Key? key,
+    required this.email,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,26 +37,31 @@ class HomePage extends StatelessWidget {
                 'Hello World',
                 style: TextStyle(fontSize: 30),
               ),
-              Text('a@a.com', style: TextStyle(fontSize: 18)),
+              Text(email, style: TextStyle(fontSize: 18)),
 
-              Container(
-                height: 60,
-                width: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                        image: AssetImage(
-                          AssetsPath().loginBtnPNG,
-                        ),
-                        fit: BoxFit.cover)),
-                child: const Center(
-                    child: Text(
-                  'Sign Out',
-                  style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500),
-                )),
+              GestureDetector(
+                onTap: (() {
+                  AuthController.instance.logOut();
+                }),
+                child: Container(
+                  height: 60,
+                  width: 200,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      image: DecorationImage(
+                          image: AssetImage(
+                            AssetsPath().loginBtnPNG,
+                          ),
+                          fit: BoxFit.cover)),
+                  child: const Center(
+                      child: Text(
+                    'Sign Out',
+                    style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
+                  )),
+                ),
               ),
 
               // Wrap(
